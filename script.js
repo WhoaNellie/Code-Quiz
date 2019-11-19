@@ -1,6 +1,6 @@
 window.addEventListener('DOMContentLoaded', (event) => {
     let start = document.getElementById("start");
-    // let hScore = document.getElementById("hScore");
+    let hScore = document.getElementById("hScore");
     let time = document.getElementById("time");
     let quest = document.getElementById("question");
     let answers = document.getElementById("answers");
@@ -19,7 +19,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         displayAnswers();
     }
     
-
+// timer starts delayed for some reason? find fix other than starting at 16
     function setTime(){
         let timer = setInterval(function (){
           
@@ -31,10 +31,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
             clearInterval(timer);
             time.textContent  = "";
             console.log("NEXT");
-            currentQ++;
+            nextQ();
           }
       
         }, 1000)
+    }
+
+    function nextQ(){
+        currentQ++;
+        displayQuestion();
+        displayAnswers();
     }
 
     function displayQuestion(){
@@ -60,16 +66,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
         if(this.textContent == questions[currentQ].answer){
             console.log("hoo-ray");
+            score += countdown;
+            countdown = 15;
+        }else{
+            countdown -= 5;
         }
 
         if(currentQ < 4){
-            currentQ++;
-            countdown = 15;
-            displayQuestion();
-            displayAnswers();
+            nextQ();
             console.log(currentQ);
         }else{
-            console.log("end");
+            console.log(score);
         }
     }
 
