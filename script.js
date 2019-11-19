@@ -5,6 +5,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     let time = document.getElementById("time");
     let quest = document.getElementById("question");
     let answers = document.getElementById("answers");
+    let endCard = document.getElementById("endCard");
 
     let currentQ = 0;
     let countdown = 15;
@@ -28,12 +29,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
       
           time.textContent = countdown;
       
-        //   fix timer trying to call nextq after quiz is over
+        //   time doesn't return if it reaches 0
           if(countdown < 1 && currentQ < 4){
             clearInterval(timer);
             time.textContent  = "";
             console.log("NEXT");
             nextQ();
+          }else if(countdown < 1 && currentQ >= 4){
+            clearInterval(timer);
+            endQuiz();
           }
       
         }, 1000)
@@ -86,9 +90,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     function endQuiz(){
         quest.innerHTML = "";
         answers.innerHTML = "";
-        // let endCard = document.createElement("h1");
-        // endCard.textContent = "This is your score: " + score;
-        // container.appendChild(endCard);
+        countdown = "";
+        endCard.textContent = "This is your score: " + score;
         console.log(score);
     }
 
