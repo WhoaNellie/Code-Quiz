@@ -5,6 +5,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     let quest = document.getElementById("question");
     let answers = document.getElementById("answers");
 
+    let currentQ = 0;
 
     start.addEventListener("click", startQuiz);
 
@@ -29,24 +30,25 @@ window.addEventListener('DOMContentLoaded', (event) => {
             clearInterval(timer);
             time.textContent  = "";
             console.log("NEXT");
+            currentQ++;
           }
       
         }, 1000)
     }
 
     function displayQuestion(){
-        quest.textContent = questions[0].title;
+        quest.textContent = questions[currentQ].title;
     }
 
      
     function displayAnswers(){
+        answers.innerHTML = "";
         for(let i = 0; i < 4 ; i++){
             console.log(i);
             let li = document.createElement("li");
-            li.textContent = questions[0].choices[i];
+            li.textContent = questions[currentQ].choices[i];
             li.setAttribute("index", i);
 
-            //pass gradeAnwer the index of the clicked on item somehow or find a way to get it in the function
             li.addEventListener("click", gradeAnswer);
 
             answers.append(li);
@@ -55,16 +57,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     function gradeAnswer(ind){
         console.log("click");
-        // console.log(ind);
 
-        // // this returns thethe li
-        // console.log(this);
-
-        // console.log(this.textContent);
-
-        if(this.textContent == questions[0].answer){
+        if(this.textContent == questions[currentQ].answer){
             console.log("hoo-ray");
         }
+
+        currentQ++;
+        countdown = 15;
+        displayQuestion();
+        displayAnswers();
+        console.log(currentQ);
     }
 
 });
