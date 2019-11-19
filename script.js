@@ -6,6 +6,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     let answers = document.getElementById("answers");
 
     let currentQ = 0;
+    let countdown = 15;
+    let score = 0;
 
     start.addEventListener("click", startQuiz);
 
@@ -17,7 +19,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
         displayAnswers();
     }
     
-    let countdown = 15;
 
     function setTime(){
         let timer = setInterval(function (){
@@ -44,7 +45,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
     function displayAnswers(){
         answers.innerHTML = "";
         for(let i = 0; i < 4 ; i++){
-            console.log(i);
             let li = document.createElement("li");
             li.textContent = questions[currentQ].choices[i];
             li.setAttribute("index", i);
@@ -62,11 +62,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
             console.log("hoo-ray");
         }
 
-        currentQ++;
-        countdown = 15;
-        displayQuestion();
-        displayAnswers();
-        console.log(currentQ);
+        if(currentQ < 4){
+            currentQ++;
+            countdown = 15;
+            displayQuestion();
+            displayAnswers();
+            console.log(currentQ);
+        }else{
+            console.log("end");
+        }
     }
 
 });
