@@ -9,8 +9,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
     function startQuiz(){
         start.style.display = "none";
         console.log("hello");
+        setTime();
     }
 
+    // 15 seconds per question
     let countdown = 10;
 
     function setTime(){
@@ -22,8 +24,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
       
           if(countdown < 1){
             clearInterval(timer);
-            timeBox.textContent  = "";
-            console.log("YA DONE");
+            time.textContent  = "";
+            console.log("NEXT");
           }
       
         }, 1000)
