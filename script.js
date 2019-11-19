@@ -1,4 +1,5 @@
 window.addEventListener('DOMContentLoaded', (event) => {
+    let container = document.getElementById("container");
     let start = document.getElementById("start");
     let hScore = document.getElementById("hScore");
     let time = document.getElementById("time");
@@ -27,7 +28,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
       
           time.textContent = countdown;
       
-          if(countdown < 1){
+        //   fix timer trying to call nextq after quiz is over
+          if(countdown < 1 && currentQ < 4){
             clearInterval(timer);
             time.textContent  = "";
             console.log("NEXT");
@@ -76,8 +78,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
             nextQ();
             console.log(currentQ);
         }else{
-            console.log(score);
+            endQuiz();
         }
+    }
+
+    // trying to add an element broke everything for some reason
+    function endQuiz(){
+        quest.innerHTML = "";
+        answers.innerHTML = "";
+        // let endCard = document.createElement("h1");
+        // endCard.textContent = "This is your score: " + score;
+        // container.appendChild(endCard);
+        console.log(score);
     }
 
 });
