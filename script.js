@@ -14,59 +14,70 @@ window.addEventListener('DOMContentLoaded', (event) => {
     let score = 0;
     let name = "";
 
+    let timer;
+
+    let scoreBoard = {}
+
     start.addEventListener("click", startQuiz);
     hScore.addEventListener("click", writeScore);
-    form.addEventListener("submit", function(event){
+    form.addEventListener("submit", function (event) {
         event.preventDefault();
         name = nameBox.value.trim();
         writeScore();
     })
 
-    function startQuiz(){
+    function startQuiz() {
         start.style.display = "none";
         console.log("hello");
         setTime();
         displayQuestion();
         displayAnswers();
     }
-    
-// timer starts delayed for some reason? find fix other than starting at 16
-    function setTime(){
-        let timer = setInterval(function (){
-          
-          countdown--;
-      
-          time.textContent = countdown;
-      
-          if(countdown < 1 && currentQ < 4){
-            clearInterval(timer);
-            time.textContent  = "";
-            console.log("NEXT");
-            nextQ();
-            countdown = 15;
-          }else if(countdown < 1 && currentQ >= 4){
-            clearInterval(timer);
-            endQuiz();
-          }
-      
+
+    // timer starts delayed for some reason? find fix other than starting at 16 time speeds up
+    function setTime() {
+
+        time.textContent = countdown;
+
+        clearInterval(timer);
+
+        timer = setInterval(function () {
+
+            countdown--;
+
+            time.textContent = countdown;
+
+            if (countdown < 1) {
+                clearInterval(timer);
+                time.textContent = "";
+                if (currentQ < 4) {
+                    console.log("NEXT");
+                    nextQ();
+                    countdown = 15;
+                } else {
+                    endQuiz();
+                }
+            }
+
+
         }, 1000)
     }
 
-    function nextQ(){
+    function nextQ() {
         currentQ++;
         displayQuestion();
         displayAnswers();
         setTime();
     }
 
-    function displayQuestion(){
+    function displayQuestion() {
         quest.textContent = questions[currentQ].title;
     }
 
-     
-    function displayAnswers(){
+
+    function displayAnswers() {
         answers.innerHTML = "";
-        for(let i = 0; i < 4 ; i++){
+        for (let i = 0; i < 4; i++) {
             let li = document.createElement("li");
             li.textContent = questions[currentQ].choices[i];
             li.setAttribute("index", i);
@@ -77,39 +88,46 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
     }
 
-    function gradeAnswer(ind){
+    function gradeAnswer(ind) {
         console.log("click");
 
-        if(this.textContent == questions[currentQ].answer){
+        if (this.textContent == questions[currentQ].answer) {
             console.log("hoo-ray");
             score += countdown;
             countdown = 15;
-        }else{
-            // allows score to be negative if last question is wrong, fix this
+        } else if(countdown >= 5){
             countdown -= 5;
         }
 
-        if(currentQ < 4){
+        if (currentQ < 4) {
             nextQ();
             console.log(currentQ);
-        }else{
+        } else {
             endQuiz();
         }
     }
 
-    function endQuiz(){
+    function endQuiz() {
         quest.innerHTML = "";
         answers.innerHTML = "";
-        countdown = "";
+        time.innerHTML = "";
+        countdown = 0;
         endCard.textContent = "This is your score: " + score;
         form.style.display = "block";
     }
 
-    function writeScore(){
+    function writeScore() {
         localStorage.setItem("name", name);
         localStorage.setItem("score", score);
+        scoreBoard[name] = score;
         console.log(name);
         console.log(score);
+        console.log(scoreBoard);
+    }
+
+    function populateSB() {
+        // will have to make an object to add names/scores too and populate a list
+        // write scoreBoard to local storage, stringify
     }
 
 });
