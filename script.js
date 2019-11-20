@@ -6,12 +6,21 @@ window.addEventListener('DOMContentLoaded', (event) => {
     let quest = document.getElementById("question");
     let answers = document.getElementById("answers");
     let endCard = document.getElementById("endCard");
+    let form = document.getElementById("scoreForm");
+    let nameBox = document.getElementById("name");
 
     let currentQ = 0;
     let countdown = 15;
     let score = 0;
+    let name = "";
 
     start.addEventListener("click", startQuiz);
+    hScore.addEventListener("click", writeScore);
+    form.addEventListener("submit", function(event){
+        event.preventDefault();
+        name = nameBox.value.trim();
+        writeScore();
+    })
 
     function startQuiz(){
         start.style.display = "none";
@@ -29,12 +38,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
       
           time.textContent = countdown;
       
-        //   time doesn't return if it reaches 0
           if(countdown < 1 && currentQ < 4){
             clearInterval(timer);
             time.textContent  = "";
             console.log("NEXT");
             nextQ();
+            countdown = 15;
           }else if(countdown < 1 && currentQ >= 4){
             clearInterval(timer);
             endQuiz();
@@ -47,6 +56,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         currentQ++;
         displayQuestion();
         displayAnswers();
+        setTime();
     }
 
     function displayQuestion(){
@@ -75,6 +85,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             score += countdown;
             countdown = 15;
         }else{
+            // allows score to be negative if last question is wrong, fix this
             countdown -= 5;
         }
 
@@ -86,12 +97,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
     }
 
-    // trying to add an element broke everything for some reason
     function endQuiz(){
         quest.innerHTML = "";
         answers.innerHTML = "";
         countdown = "";
         endCard.textContent = "This is your score: " + score;
+        form.style.display = "block";
+    }
+
+    function writeScore(){
+        localStorage.setItem("name", name);
+        localStorage.setItem("score", score);
+        console.log(name);
         console.log(score);
     }
 
