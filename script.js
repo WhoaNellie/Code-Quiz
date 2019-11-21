@@ -8,6 +8,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     let endCard = document.getElementById("endCard");
     let form = document.getElementById("scoreForm");
     let nameBox = document.getElementById("name");
+    let scoreList = document.getElementById("scoreList");
 
     let currentQ = 0;
     let countdown = 15;
@@ -16,7 +17,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     let timer;
 
-    let scoreBoard = {}
+    let scoreBoard = [];
+
 
     start.addEventListener("click", startQuiz);
     hScore.addEventListener("click", writeScore);
@@ -34,7 +36,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
         displayAnswers();
     }
 
-    // timer starts delayed for some reason? find fix other than starting at 16 time speeds up
     function setTime() {
 
         time.textContent = countdown;
@@ -48,8 +49,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
             time.textContent = countdown;
 
             if (countdown < 1) {
+                
                 clearInterval(timer);
-                time.textContent = "";
+
                 if (currentQ < 4) {
                     console.log("NEXT");
                     nextQ();
@@ -95,8 +97,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
             console.log("hoo-ray");
             score += countdown;
             countdown = 15;
-        } else if(countdown >= 5){
-            countdown -= 5;
+        } else{
+            countdown = 10;
         }
 
         if (currentQ < 4) {
@@ -117,17 +119,20 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
 
     function writeScore() {
-        localStorage.setItem("name", name);
-        localStorage.setItem("score", score);
+        // localStorage.setItem("name", name);
+        // localStorage.setItem("score", score);
         scoreBoard[name] = score;
-        console.log(name);
-        console.log(score);
+        localStorage.setItem("scoreboard", JSON.stringify(scoreBoard));
+        populateSB();
         console.log(scoreBoard);
     }
 
     function populateSB() {
-        // will have to make an object to add names/scores too and populate a list
-        // write scoreBoard to local storage, stringify
+        scoreBoard = JSON.parse("scoreboard");
+        for(let i = 0; i < scoreBoard.length; i++){
+
+        }
+
     }
 
 });
