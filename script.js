@@ -33,7 +33,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
     })
 
 
-
     function writeScore() {
 
         scoreBoard.push({
@@ -47,7 +46,19 @@ window.addEventListener('DOMContentLoaded', (event) => {
     function populateSB() {
         scoreBoard = JSON.parse(localStorage.getItem("scoreboard"));
         for(let i = 0; i < scoreBoard.length; i++){
+            let li = document.createElement("li");
+            let span1 = document.createElement("span");
+            let span2 = document.createElement("span");
 
+            li.appendChild(span1);
+            li.appendChild(span2);
+
+            span1.innerHTML = scoreBoard[i].name;
+            span2.innerHTML = scoreBoard[i].score;
+
+            li.setAttribute("index", i);
+
+            scoreList.appendChild(li);
         }
 
     }
