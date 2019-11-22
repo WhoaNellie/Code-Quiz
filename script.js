@@ -16,17 +16,42 @@ window.addEventListener('DOMContentLoaded', (event) => {
     let name = "";
 
     let timer;
-
     let scoreBoard = [];
 
+    if(localStorage.getItem("scoreboard")){
+        scoreBoard = JSON.parse(localStorage.getItem("scoreboard"));
+        console.log('Loaded scoreboard: ' + scoreBoard);
+    }
 
     start.addEventListener("click", startQuiz);
-    hScore.addEventListener("click", writeScore);
     form.addEventListener("submit", function (event) {
         event.preventDefault();
         name = nameBox.value.trim();
+        console.log(name);
+        console.log(score)
         writeScore();
     })
+
+
+
+    function writeScore() {
+
+        scoreBoard.push({
+            name: name, score: score
+        });
+        localStorage.setItem("scoreboard", JSON.stringify(scoreBoard));
+        populateSB();
+        console.log(scoreBoard);
+    }
+
+    function populateSB() {
+        scoreBoard = JSON.parse(localStorage.getItem("scoreboard"));
+        for(let i = 0; i < scoreBoard.length; i++){
+
+        }
+
+    }
+
 
     function startQuiz() {
         start.style.display = "none";
@@ -116,24 +141,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
         countdown = 0;
         endCard.textContent = "This is your score: " + score;
         form.style.display = "block";
-    }
-
-    function writeScore() {
-        // localStorage.setItem("name", name);
-        // localStorage.setItem("score", score);
-        scoreBoard[name] = score;
-        localStorage.setItem("scoreboard", JSON.stringify(scoreBoard));
-        populateSB();
-        console.log(scoreBoard);
-    }
-
-    function populateSB() {
-        let parsedSB = localStorage.getItem("scoreboard");
-        parsedSB = JSON.parse(parsedSB);
-        for(let i = 0; i < parsedSB.length; i++){
-
-        }
-
     }
 
 });
