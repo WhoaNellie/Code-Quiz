@@ -90,7 +90,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
     }
 
-    function gradeAnswer(ind) {
+    function gradeAnswer() {
         console.log("click");
 
         if (this.textContent == questions[currentQ].answer) {
@@ -128,8 +128,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
 
     function populateSB() {
-        scoreBoard = JSON.parse("scoreboard");
-        for(let i = 0; i < scoreBoard.length; i++){
+        let parsedSB = localStorage.getItem("scoreboard");
+        parsedSB = JSON.parse(parsedSB);
+        for(let i = 0; i < parsedSB.length; i++){
 
         }
 
