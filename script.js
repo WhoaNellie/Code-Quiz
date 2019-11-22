@@ -24,6 +24,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
 
     start.addEventListener("click", startQuiz);
+    hScore.addEventListener("click",populateSB)
     form.addEventListener("submit", function (event) {
         event.preventDefault();
         name = nameBox.value.trim();
