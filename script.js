@@ -30,6 +30,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     form.addEventListener("submit", function (event) {
         event.preventDefault();
         name = nameBox.value.trim();
+        nameBox.value = "";
         console.log(name);
         console.log(score)
         writeScore();
@@ -55,9 +56,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
             let span1 = document.createElement("span");
             let span2 = document.createElement("span");
 
+            li.textContent = (i+1) + ". "
             li.appendChild(span1);
             li.appendChild(span2);
-
+            
             span1.innerHTML = scoreBoard[i].name;
             span2.innerHTML = scoreBoard[i].score;
 

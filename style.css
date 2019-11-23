@@ -10,7 +10,7 @@ form{
     margin: 5%;
 }
 
-/* normal stuff */
+/* start page styling */
 body{
     font-family: sans-serif;
     line-height: 140%;
@@ -23,6 +23,8 @@ body{
 }
     #hScore a{
         text-decoration: none;
+        display: block;
+        margin: 3vh;
     }
 
 h1{
@@ -78,4 +80,42 @@ h1{
     }
     #answers li:active{
         background-color: rgb(92, 0, 92);
+    }
+
+/* submit name styling */
+
+#endCard{
+    width: 85%;
+    margin: 1vh auto;
+}
+
+form{
+    width: 85%;
+    margin: 1vh auto;
+}
+
+
+/* high score styling */
+
+#scoreList{
+
+    width: 85%;
+    margin: 4vh auto;
+    margin-top: 8vh;
+
+}
+    #scoreList li{
+        padding: 3%;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+    }
+
+        #scoreList li span:first-of-type{
+            flex-grow: 2;
+            margin-left: 2%;
+        } 
+
+    #scoreList li:nth-of-type(odd){
+        background-color: rgb(172, 107, 172);
     }
