@@ -10,9 +10,9 @@ var questions = [
       answer: "parentheses"
     },
     {
-        title: "If a function is executed before its written place in the code, it may have been ___________.",
-        choices: ["grabbed", "parsed", "bolstered", "hoisted"],
-        answer: "hoisted"
+        title: "Inside which HTML element do we put the JavaScript?",
+        choices: ["<script>", "<scripting>", "<js>", "<javascript>"],
+        answer: "<script>"
     },
     {
         title: "This JSON method can convert an object into a string.",
@@ -20,9 +20,9 @@ var questions = [
         answer: "stringify"
     },
     {
-        title: "A good CSS tool that can organize child elements with ease.",
-        choices: ["important", "flexbox", "kazoo", "attribute"],
-        answer: "flexbox"
+        title: "Where is the correct place to insert a JavaScript?",
+        choices: ["The <head> section", "The <body> section", "Both", "Neither"],
+        answer: "Both"
     }
   ];
   
