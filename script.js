@@ -12,6 +12,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     let taunt = document.getElementById("taunt");
     let timeBox = document.getElementById("timeBox");
 
+
     let currentQ = 0;
     let countdown = 15;
     let score = 0;
@@ -19,6 +20,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     let timer;
     let scoreBoard = [];
+    let generated = false;
 
     if(localStorage.getItem("scoreboard")){
         scoreBoard = JSON.parse(localStorage.getItem("scoreboard"));
@@ -51,23 +53,27 @@ window.addEventListener('DOMContentLoaded', (event) => {
     function populateSB() {
         scoreBoard = JSON.parse(localStorage.getItem("scoreboard"));
         // sort scores, only show top 10?
-        for(let i = 0; i < scoreBoard.length; i++){
-            let li = document.createElement("li");
-            let span1 = document.createElement("span");
-            let span2 = document.createElement("span");
+        
+        if(!generated){
+            for(let i = 0; i < scoreBoard.length; i++){
+                let li = document.createElement("li");
+                let span1 = document.createElement("span");
+                let span2 = document.createElement("span");
 
-            li.textContent = (i+1) + ". "
-            li.appendChild(span1);
-            li.appendChild(span2);
-            
-            span1.innerHTML = scoreBoard[i].name;
-            span2.innerHTML = scoreBoard[i].score;
+                li.textContent = (i+1) + ". "
+                li.appendChild(span1);
+                li.appendChild(span2);
+                
+                span1.innerHTML = scoreBoard[i].name;
+                span2.innerHTML = scoreBoard[i].score;
 
-            li.setAttribute("index", i);
+                li.setAttribute("index", i);
 
-            scoreList.appendChild(li);
+                scoreList.appendChild(li);
+                generated = true;
+            }
         }
-
+        scoreList.style.display = "block";
     }
 
 
@@ -77,6 +83,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         taunt.innerHTML = "";
         hScore.style.display = "none";
         timeBox.style.display = "block";
+        scoreList.style.display = "none";
 
         console.log("hello");
         setTime();
@@ -161,10 +168,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
         quest.innerHTML = "";
         answers.innerHTML = "";
         timeBox.style.display = "none";
-        hScore.style.display = "block"
         countdown = 0;
         endCard.textContent = "This is your score: " + score;
         form.style.display = "block";
+        hScore.style.display = "block"
     }
 
 });
