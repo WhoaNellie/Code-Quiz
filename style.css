@@ -1,6 +1,81 @@
 /* mobile first!!! */
-
+/* js stuff */
 form{
     display: none;
 }
+#timeBox{
+    display: none;
+    position: absolute;
+    right: 0;
+    margin: 5%;
+}
 
+/* normal stuff */
+body{
+    font-family: sans-serif;
+    line-height: 140%;
+}
+
+.top{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20%;
+}
+    #hScore a{
+        text-decoration: none;
+    }
+
+h1{
+    margin: 5vh auto;
+    text-align: center;
+    font-size: 140%;
+    font-weight: bold;
+}
+
+#start{
+    text-align: center;
+    display: block;
+    margin: 4vh auto;
+    padding: 3.5% 8%;
+    border: none;
+    border-radius: 5px;
+    background-color: purple;
+
+    color: white;
+    font-size: 120%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* question/answer styling */
+
+#question{
+    font-size: 130%;
+    font-weight: bold;
+    width: 85%;
+    margin: 4vh auto;
+}
+
+#answers{
+    margin: 1vh auto;
+}
+
+#answers li{
+    width: 80%;
+    font-size: 120%;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin: 3vh auto;
+    background-color: purple;
+    color: white;
+    padding: 3%;
+    border-radius: 10px;
+}
+
+    #answers li:hover{
+        box-shadow: 0px 0px 10px black ;
+    }
+    #answers li:active{
+        background-color: rgb(92, 0, 92);
+    }

@@ -7,19 +7,26 @@
     <script src="script.js"></script>
     <script src="questions.js"></script>
 
+    <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
     <div class="container">
+        <div class="top">
+            <div id="hScore"><a href="#">View Highscores</a></div>
 
-        <div id="hScore"><a href="#">View Highscores</a></div>
+            <div id="timeBox">Time: <span id="time"></span></div>
+        </div>
 
-        <div>Time: <span id="time"></span></div>
+        <div id="taunt">
+            <h1>Coding Quiz Challenge</h1>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reprehenderit, illum. Maxime expedita consequatur labore soluta aut suscipit libero ducimus, rerum harum iusto unde perspiciatis aliquid cumque porro vitae voluptate neque.</p>
+        </div>
 
         <button id="start">Start Quiz</button>
 
-        <h1 id="question"></h1>
+        <h2 id="question"></h2>
 
         <ul id="answers"></ul>
 
@@ -27,6 +34,7 @@
 
         <form action="writeScore()" method="post" id="scoreForm">
             <input type="text" name="name" id="name">
+
             <button type="submit">Submit</button>
         </form>
 

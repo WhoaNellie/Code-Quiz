@@ -9,6 +9,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     let form = document.getElementById("scoreForm");
     let nameBox = document.getElementById("name");
     let scoreList = document.getElementById("scoreList");
+    let taunt = document.getElementById("taunt");
+    let timeBox = document.getElementById("timeBox");
 
     let currentQ = 0;
     let countdown = 15;
@@ -44,8 +46,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
         console.log(scoreBoard);
     }
 
+    // add clear HS button?
     function populateSB() {
         scoreBoard = JSON.parse(localStorage.getItem("scoreboard"));
+        // sort scores, only show top 10?
         for(let i = 0; i < scoreBoard.length; i++){
             let li = document.createElement("li");
             let span1 = document.createElement("span");
@@ -65,8 +69,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
 
 
+    //disappear "view highscores" on start?
     function startQuiz() {
         start.style.display = "none";
+        taunt.innerHTML = "";
+        hScore.style.display = "none";
+        timeBox.style.display = "block";
+
         console.log("hello");
         setTime();
         displayQuestion();
@@ -81,7 +90,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
         timer = setInterval(function () {
 
-            countdown--;
+            // countdown--;
 
             time.textContent = countdown;
 
@@ -118,7 +127,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         answers.innerHTML = "";
         for (let i = 0; i < 4; i++) {
             let li = document.createElement("li");
-            li.textContent = questions[currentQ].choices[i];
+            li.textContent = (i + 1) + ". " + questions[currentQ].choices[i];
             li.setAttribute("index", i);
 
             li.addEventListener("click", gradeAnswer);
@@ -149,7 +158,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     function endQuiz() {
         quest.innerHTML = "";
         answers.innerHTML = "";
-        time.innerHTML = "";
+        timeBox.style.display = "none";
+        hScore.style.display = "block"
         countdown = 0;
         endCard.textContent = "This is your score: " + score;
         form.style.display = "block";
