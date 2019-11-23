@@ -11,6 +11,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     let scoreList = document.getElementById("scoreList");
     let taunt = document.getElementById("taunt");
     let timeBox = document.getElementById("timeBox");
+    let nameLabel = document.getElementById("nameLabel");
 
 
     let currentQ = 0;
@@ -25,6 +26,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     if(localStorage.getItem("scoreboard")){
         scoreBoard = JSON.parse(localStorage.getItem("scoreboard"));
         console.log('Loaded scoreboard: ' + scoreBoard);
+    }else{
+        localStorage.setItem("scoreboard", JSON.stringify(scoreBoard))
     }
 
     start.addEventListener("click", startQuiz);
@@ -36,11 +39,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
         console.log(name);
         console.log(score)
         writeScore();
+        form.style.display = "none";
     })
 
 
     function writeScore() {
-
+        scoreList.innerHTML = "";
+        console.log(name+score);
         scoreBoard.push({
             name: name, score: score
         });
@@ -53,27 +58,28 @@ window.addEventListener('DOMContentLoaded', (event) => {
     function populateSB() {
         scoreBoard = JSON.parse(localStorage.getItem("scoreboard"));
         // sort scores, only show top 10?
+        scoreBoard.sort((a,b) => (a.score < b.score) ? 1 : -1);
         
-        if(!generated){
-            for(let i = 0; i < scoreBoard.length; i++){
-                let li = document.createElement("li");
-                let span1 = document.createElement("span");
-                let span2 = document.createElement("span");
+        for(let i = 0; i < scoreBoard.length; i++){
+            let li = document.createElement("li");
+            let span1 = document.createElement("span");
+            let span2 = document.createElement("span");
 
-                li.textContent = (i+1) + ". "
-                li.appendChild(span1);
-                li.appendChild(span2);
-                
-                span1.innerHTML = scoreBoard[i].name;
-                span2.innerHTML = scoreBoard[i].score;
+            li.textContent = (i+1) + ". "
+            li.appendChild(span1);
+            li.appendChild(span2);
+            
+            span1.innerHTML = scoreBoard[i].name;
+            span2.innerHTML = scoreBoard[i].score;
 
-                li.setAttribute("index", i);
+            li.setAttribute("index", i);
 
-                scoreList.appendChild(li);
-                generated = true;
-            }
+            scoreList.appendChild(li);
+            generated = true;
         }
+        
         scoreList.style.display = "block";
+        hScore.style.display = "none";
     }
 
 
@@ -99,7 +105,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
         timer = setInterval(function () {
 
-            // countdown--;
+            countdown--;
 
             time.textContent = countdown;
 
@@ -147,8 +153,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     function gradeAnswer() {
         console.log("click");
+        console.log(this.textContent);
+        let broken = this.textContent.split(" ");
 
-        if (this.textContent == questions[currentQ].answer) {
+        if (broken[1] == questions[currentQ].answer) {
             console.log("hoo-ray");
             score += countdown;
             countdown = 15;
@@ -170,8 +178,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
         timeBox.style.display = "none";
         countdown = 0;
         endCard.textContent = "This is your score: " + score;
+        nameLabel.textContent = "Please enter your name:"
         form.style.display = "block";
-        hScore.style.display = "block"
+        // hScore.style.display = "block";
     }
 
 });
