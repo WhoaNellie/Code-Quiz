@@ -25,7 +25,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     if(localStorage.getItem("scoreboard")){
         scoreBoard = JSON.parse(localStorage.getItem("scoreboard"));
-        console.log('Loaded scoreboard: ' + scoreBoard);
     }else{
         localStorage.setItem("scoreboard", JSON.stringify(scoreBoard))
     }
@@ -36,8 +35,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
         event.preventDefault();
         name = nameBox.value.trim();
         nameBox.value = "";
-        console.log(name);
-        console.log(score)
         writeScore();
         form.style.display = "none";
     })
@@ -45,22 +42,19 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     function writeScore() {
         scoreList.innerHTML = "";
-        console.log(name+score);
         scoreBoard.push({
             name: name, score: score
         });
         localStorage.setItem("scoreboard", JSON.stringify(scoreBoard));
         populateSB();
-        console.log(scoreBoard);
     }
 
-    // add clear HS button?
     function populateSB() {
         scoreBoard = JSON.parse(localStorage.getItem("scoreboard"));
-        // sort scores, only show top 10?
+        
         scoreBoard.sort((a,b) => (a.score < b.score) ? 1 : -1);
         
-        for(let i = 0; i < scoreBoard.length; i++){
+        for(let i = 0; i < 10; i++){
             let li = document.createElement("li");
             let span1 = document.createElement("span");
             let span2 = document.createElement("span");
@@ -91,7 +85,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
         timeBox.style.display = "block";
         scoreList.style.display = "none";
 
-        console.log("hello");
         setTime();
         displayQuestion();
         displayAnswers();
@@ -114,7 +107,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 clearInterval(timer);
 
                 if (currentQ < 4) {
-                    console.log("NEXT");
                     nextQ();
                     countdown = 15;
                 } else {
@@ -152,12 +144,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
 
     function gradeAnswer() {
-        console.log("click");
-        console.log(this.textContent);
         let broken = this.textContent.split(" ");
 
         if (broken[1] == questions[currentQ].answer) {
-            console.log("hoo-ray");
             score += countdown;
             countdown = 15;
         } else{
@@ -166,7 +155,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
         if (currentQ < 4) {
             nextQ();
-            console.log(currentQ);
         } else {
             endQuiz();
         }
@@ -180,7 +168,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
         endCard.textContent = "This is your score: " + score;
         nameLabel.textContent = "Please enter your name:"
         form.style.display = "block";
-        // hScore.style.display = "block";
     }
 
 });
