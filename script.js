@@ -24,7 +24,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     let timer;
     let scoreBoard = [];
-    // let generated = false;
 
     if(localStorage.getItem("scoreboard")){
         scoreBoard = JSON.parse(localStorage.getItem("scoreboard"));
@@ -46,7 +45,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
         writeScore();
         form.style.display = "none";
     })
-    // display none doesn't happen until after 10 clicks??
 
 
     function writeScore() {
@@ -98,16 +96,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
 
 
-    //disappear "view highscores" on start?
     function startQuiz() {
         start.style.display = "none";
         taunt.innerHTML = "";
         hScore.style.display = "none";
         timeBox.style.display = "block";
         scoreList.style.display = "none";
-
-        // audio.setAttribute("src", "assets/ding.wav");
-        // audio.setAttribute("src", "assets/error.wav");
 
         setTime();
         displayQuestion();
@@ -193,9 +187,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
             endQuiz();
         }
     }
-
-    let endTest = document.getElementById("endTest");
-    endTest.addEventListener("click", endQuiz);
 
     function endQuiz() {
         quest.innerHTML = "";
