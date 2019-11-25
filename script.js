@@ -194,6 +194,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
     }
 
+    let endTest = document.getElementById("endTest");
+    endTest.addEventListener("click", endQuiz);
+
     function endQuiz() {
         quest.innerHTML = "";
         answers.innerHTML = "";
