@@ -195,6 +195,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         timeBox.style.display = "none";
         restart.style.display = "block";
         clearHS.style.display = "block";
+        audio.remove();
         clearInterval(timer);
         endCard.textContent = "This is your score: " + score;
         nameLabel.textContent = "Please enter your name:"
