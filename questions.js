@@ -20,9 +20,9 @@ var questions = [
         answer: "stringify"
     },
     {
-        title: "Where is the correct place to insert a JavaScript?",
-        choices: ["The <head> section", "The <body> section", "Both", "Neither"],
-        answer: "Both"
+        title: "Another way to write x = x + 1",
+        choices: ["x1", "x + 1", "x++", "x += x"],
+        answer: "x++"
     }
   ];
   
