@@ -195,7 +195,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         timeBox.style.display = "none";
         restart.style.display = "block";
         clearHS.style.display = "block";
-        countdown = 0;
+        clearInterval(timer);
         endCard.textContent = "This is your score: " + score;
         nameLabel.textContent = "Please enter your name:"
         form.style.display = "block";
