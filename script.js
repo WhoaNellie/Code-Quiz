@@ -21,7 +21,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     let timer;
     let scoreBoard = [];
-    let generated = false;
+    // let generated = false;
 
     if(localStorage.getItem("scoreboard")){
         scoreBoard = JSON.parse(localStorage.getItem("scoreboard"));
@@ -38,6 +38,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         writeScore();
         form.style.display = "none";
     })
+    // display none doesn't happen until after 10 clicks??
 
 
     function writeScore() {
@@ -53,8 +54,21 @@ window.addEventListener('DOMContentLoaded', (event) => {
         scoreBoard = JSON.parse(localStorage.getItem("scoreboard"));
         
         scoreBoard.sort((a,b) => (a.score < b.score) ? 1 : -1);
+
+        console.log(scoreBoard);
+
+        if(!scoreBoard.length){
+            let li = document.createElement("li");
+            li.textContent = "No high scores yet!";
+            scoreList.appendChild(li);
+        }
+
+        let len;
+
+        if(scoreBoard.length < 10){ len =  scoreBoard.length; }
+        else{ len = 10; }
         
-        for(let i = 0; i < 10; i++){
+        for(let i = 0; i < len; i++){
             let li = document.createElement("li");
             let span1 = document.createElement("span");
             let span2 = document.createElement("span");
@@ -69,7 +83,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
             li.setAttribute("index", i);
 
             scoreList.appendChild(li);
-            generated = true;
         }
         
         scoreList.style.display = "block";
@@ -144,6 +157,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
 
     function gradeAnswer() {
+        // maybe make the numbers into before elements to decrease the jank
         let broken = this.textContent.split(" ");
 
         if (broken[1] == questions[currentQ].answer) {

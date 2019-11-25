@@ -7,6 +7,6 @@ style tablet mode
 style desktop mode
 add sounds
 write better copy/questions
-
+clear HS button?
 
  -->
