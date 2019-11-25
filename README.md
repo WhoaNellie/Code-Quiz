@@ -18,6 +18,7 @@ After taking the quiz you may enter your name and submit your results to the sco
 ## Credits
 
 Credit to http://www.darwine.nl/~erwin/canvas/soundfiles/ for the sound effects.
+Credit to W3 Schools for some of the questions.
 
 ## License
 
