@@ -16,6 +16,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     let clearHS = document.getElementById("clearHS");
     let audio = document.createElement("audio");
 
+    audio.setAttribute("preload","auto");
 
     let currentQ = 0;
     let countdown = 15;

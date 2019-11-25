@@ -17,7 +17,7 @@ After taking the quiz you may enter your name and submit your results to the sco
 
 ## Credits
 
-Credit to http://www.darwine.nl/~erwin/canvas/soundfiles/ for the douns effects.
+Credit to http://www.darwine.nl/~erwin/canvas/soundfiles/ for the sound effects.
 
 ## License
 
