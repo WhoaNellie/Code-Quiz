@@ -12,6 +12,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
     let taunt = document.getElementById("taunt");
     let timeBox = document.getElementById("timeBox");
     let nameLabel = document.getElementById("nameLabel");
+    let restart = document.getElementById("restart");
+    let clearHS = document.getElementById("clearHS");
+    let audio = document.createElement("audio");
 
 
     let currentQ = 0;
@@ -31,6 +34,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     start.addEventListener("click", startQuiz);
     hScore.addEventListener("click",populateSB)
+    clearHS.addEventListener("click",function(){
+        scoreList.innerHTML = "";
+        scoreBoard = [];
+        localStorage.setItem("scoreboard", JSON.stringify(scoreBoard))
+    })
     form.addEventListener("submit", function (event) {
         event.preventDefault();
         name = nameBox.value.trim();
@@ -98,6 +106,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
         timeBox.style.display = "block";
         scoreList.style.display = "none";
 
+        // audio.setAttribute("src", "assets/ding.wav");
+        // audio.setAttribute("src", "assets/error.wav");
+
         setTime();
         displayQuestion();
         displayAnswers();
@@ -117,6 +128,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             if (countdown < 1) {
                 
+                audio.setAttribute("src", "assets/error.wav");
+                audio.play();
+
                 clearInterval(timer);
 
                 if (currentQ < 4) {
@@ -163,8 +177,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
         if (broken[1] == questions[currentQ].answer) {
             score += countdown;
             countdown = 15;
+
+            audio.setAttribute("src", "assets/ding.wav");
+            audio.play();
         } else{
             countdown = 10;
+
+            audio.setAttribute("src", "assets/error.wav");
+            audio.play();
         }
 
         if (currentQ < 4) {
@@ -178,6 +198,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
         quest.innerHTML = "";
         answers.innerHTML = "";
         timeBox.style.display = "none";
+        restart.style.display = "block";
+        clearHS.style.display = "block";
         countdown = 0;
         endCard.textContent = "This is your score: " + score;
         nameLabel.textContent = "Please enter your name:"
